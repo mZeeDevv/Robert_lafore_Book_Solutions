@@ -4,6 +4,7 @@ using namespace std;
 class person {
     string name;
 public:
+  person(string nn = ""): name(nn) {}
     void setter() {
         cout << "Enter Child Name: ";
         cin >> name;
@@ -17,6 +18,7 @@ public:
 class father : virtual public person {
     string fName;
 public:
+ father(string fnn) : fName(fnn) {}
     void setter() {
         cout << "Enter Father Name: ";
         cin >> fName;
@@ -30,6 +32,7 @@ public:
 class mother : virtual public person {
     string MotherN;
 public:
+mother(string mnn) : MotherN(mnn) {}
     void setter() {
         cout << "Enter Mother Name: ";
         cin >> MotherN;
@@ -43,6 +46,7 @@ public:
 class child : virtual public father, virtual public mother {
     int Age;
 public:
+   child(string nn="", string mnn="", string fnn="", int aa=0): person(nn), mother(mnn), father(fnn), Age(aa) {}
     void setter() {
         person::setter();
         father::setter();
@@ -59,8 +63,7 @@ public:
 };
 
 int main() {
-    child C1;
-    C1.setter();
+    child C1("Hamza", "Khattak" , "KING", 33);
     C1.getter();
     return 0;
 }
