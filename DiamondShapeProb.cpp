@@ -18,7 +18,7 @@ public:
 class father : virtual public person {
     string fName;
 public:
- father(string fnn) : fName(fnn) {}
+     father(string fnn, string nn) : person(nn), fName(fnn){}
     void setter() {
         cout << "Enter Father Name: ";
         cin >> fName;
@@ -32,7 +32,7 @@ public:
 class mother : virtual public person {
     string MotherN;
 public:
-mother(string mnn) : MotherN(mnn) {}
+ mother(string mnn, string nn) : person(nn), MotherN(mnn) {}
     void setter() {
         cout << "Enter Mother Name: ";
         cin >> MotherN;
@@ -46,7 +46,7 @@ mother(string mnn) : MotherN(mnn) {}
 class child : virtual public father, virtual public mother {
     int Age;
 public:
-   child(string nn="", string mnn="", string fnn="", int aa=0): person(nn), mother(mnn), father(fnn), Age(aa) {}
+    child(string nn = "", string mnn = "", string fnn = "", int aa = 0) : person(nn), mother(mnn, nn), father(fnn, nn), Age(aa) {}
     void setter() {
         person::setter();
         father::setter();
