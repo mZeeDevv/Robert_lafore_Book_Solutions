@@ -74,9 +74,9 @@ void savetoFile(int& count, Person* pptr[])
 			}
 		}
 	}
-
+	outfile.close();
 }
-void readfromFile(int count, Person* pptr[]) {
+void readfromFile(int& count, Person* pptr[]) {
 	ifstream infile;
 	infile.open("data.dat", ios::binary);
 	if (!infile) {
@@ -90,15 +90,16 @@ void readfromFile(int count, Person* pptr[]) {
 			if (obj == 't') {
 				pptr[i] = new Teacher;
 				Teacher* t = dynamic_cast<Teacher*>(pptr[i]);
-				infile.read((char*)&t, sizeof(Teacher));
+				infile.read((char*)t, sizeof(Teacher));
 			}
 			else {
 				pptr[i] = new Student;
-				Student* t = dynamic_cast<Student*>(pptr[i]);
-				infile.read((char*)&t, sizeof(Student));
+				Student* s = dynamic_cast<Student*>(pptr[i]);
+				infile.read((char*)s, sizeof(Student));
 			}
 		}
 	}
+	infile.close();
 }
 int main()
 {
@@ -112,7 +113,7 @@ int main()
 			<< "2- Add Teacher Record " << endl
 			<< "3- Display all the Data " << endl
 			<< "4- Read Data from files " << endl
-			<< "5- Write Data to files " << endl
+			<< "5- Write Data  files " << endl
 			<< "6- Exit the program " << endl;
 		cin >> chr;
 		switch (chr)
@@ -133,7 +134,7 @@ int main()
 			cout << "************ Database **************" << endl;
 			for (int i = 0; i < count; i++) {
 				if (typeid(*pptr[i]) == typeid(Teacher)) {
-					cout << "Teacher " << endl;
+					cout << "Teacher " << endl;	
 					pptr[i]->getter();
 				}
 				else {
